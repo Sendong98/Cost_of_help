@@ -84,11 +84,10 @@ catch_all <- catch_all %>% filter(!is.na(BodyMass)) %>% filter(!is.na(RightTarsu
 # merge left and right tarsus
 catch_all <- catch_all %>% rowwise() %>% mutate(tarsus=mean(c(RightTarsus,LeftTarsus),na.rm = TRUE))
 
-<<<<<<< HEAD
+
 catch_birth_date <- read_xlsx("C:\\Users\\ggb24\\Downloads\\catch_birth_date.xlsx")
-=======
 catch_birth_date <- read_xlsx("/Users/dongsen/Downloads/catch_birth_date.xlsx")
->>>>>>> 68b92d8013cbe2040ae417884f345c667778fde8
+
 
 df_all_4 <- df_all3 %>% filter(!is.na(BodyMass)) %>% filter(!is.na(RightTarsus)|!is.na(LeftTarsus)) %>% rowwise() %>% mutate(tarsus=mean(c(RightTarsus,LeftTarsus),na.rm = TRUE))
 pop_mean_tarsu <- mean(df_all_4$tarsus)
@@ -97,19 +96,16 @@ df_all_4 <- df_all_4 %>% mutate(condition = BodyMass*((tarsus/pop_mean_tarsu)^bS
 df_all_4 <- left_join(df_all_4,catch_birth_date[,c("CatchID","BirthDate")],by="CatchID" )
 df_all_4$age <- year(df_all_4$OccasionDate)-year(df_all_4$BirthDate)
 write.csv(df_all_4,"/Users/dongsen/Downloads/condition_caught_twice.csv")
-<<<<<<< HEAD
+
 df_all_4 <- read_csv("C:\\Users\\ggb24\\Downloads\\condition_caught_twice.csv")
-=======
->>>>>>> 68b92d8013cbe2040ae417884f345c667778fde8
 hist(df_all_4$condition)
 hist(df_all_4$BodyMass)
 hist(df_all_4$age,breaks = 20)
 true_helper_id <- df_all_4[df_all_4$Status=="H",]$BirdID[df_all_4[df_all_4$Status=="H",]$BirdID %in%unique(helper_behaviour$BirdID)]
 df_all_4[df_all_4$Status=="H"& df_all_4$BirdID %in% true_helper_id,]
-<<<<<<< HEAD
+
 par(mfrow = c(1, 2))
-=======
->>>>>>> 68b92d8013cbe2040ae417884f345c667778fde8
+
 
 ggplot(df_all_4[df_all_4$Status=="H",], aes(x = CatchOrder, y = condition,)) +  
   geom_point(size = 5, color="firebrick", alpha = 0.5) + 
@@ -117,15 +113,14 @@ ggplot(df_all_4[df_all_4$Status=="H",], aes(x = CatchOrder, y = condition,)) +
   labs(x = "CatchOrder", y = "BodyCondition") + 
   facet_wrap(~ Status)
 
-<<<<<<< HEAD
+
 ggplot(df_all_4[df_all_4$Status=="H"& df_all_4$BirdID %in% true_helper_id,], aes(x = CatchOrder, y = BodyMass,)) +  
   geom_point(size = 5, color="firebrick", alpha = 0.5) + 
   geom_line(aes(group = interaction(BirdID,FieldPeriodID),colour = Ageclass),linewidth =1.2,alpha=.6) +
   labs(x = "CatchOrder", y = "BodyMass") + 
   facet_wrap(~ Status)
 
-=======
->>>>>>> 68b92d8013cbe2040ae417884f345c667778fde8
+
 ggplot(df_all_4[df_all_4$Status=="H"& df_all_4$BirdID %in% true_helper_id,], aes(x = CatchOrder, y = condition,)) +  
   geom_point(size = 5, color="firebrick", alpha = 0.5) + 
   geom_line(aes(group = interaction(BirdID,FieldPeriodID),colour = Ageclass),linewidth =1.2,alpha=.6) +
