@@ -7,6 +7,7 @@ library(dplyr)
 library(ggpubr)
 library(lme4)
 library(lmerTest)
+library(ggplot2)
 df <- read.csv("/Users/dongsen/Downloads/twice_adults_new.csv")
 df_all <- read.csv("/Users/dongsen/Downloads/catch_twice.csv")
 str(df)
@@ -36,6 +37,8 @@ ggplot(df_new2, aes(x = CatchOrder, y = BodyMass)) +
 library(rijkspalette)
 letter <- rijksPalette("Vermeer Letter")
 letter
+plot.format <- theme(plot.background=element_blank(),panel.grid=element_blank(),panel.background=element_blank(),panel.border=element_rect(color="black",linewidth=0.5,fill=NA),axis.line=element_blank(),axis.ticks=element_line(color="black",linewidth=0.5),axis.text=element_text(color="black",size=7),axis.title=element_text(color="black",size=7),plot.title=element_text(color="black",size=7),legend.background=element_blank(),legend.key=element_blank(),legend.text=element_text(color="black",size=7),legend.title=element_text(color="black",size=7))
+
 ##############################################################################
 df_all$Year <- get_year(ymd(df_all$OccasionDate))
 df_all2 <- left_join(df_all,df_sex,by="BirdID")
