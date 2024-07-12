@@ -102,7 +102,8 @@ write.csv(df_all_4,"/Users/dongsen/Downloads/condition_caught_twice.csv")
 
 df_all_4 <- read_csv("C:\\Users\\ggb24\\Downloads\\condition_caught_twice.csv")
 hist(df_all_4$condition)
-hist(df_all_4$BodyMass)
+hist(I(df_all_4$BodyMass)^3)
+skewness(df_all_4$BodyMass)
 hist(df_all_4$age,breaks = 20)
 true_helper_id <- df_all_4[df_all_4$Status=="H",]$BirdID[df_all_4[df_all_4$Status=="H",]$BirdID %in%unique(helper_behaviour$BirdID)]
 df_all_4[df_all_4$Status=="H"& df_all_4$BirdID %in% true_helper_id,]
@@ -154,7 +155,7 @@ plot(m2)
 qqnorm(resid(m2))
 qqline(resid(m2))
 
-m3 <- lmer(BodyMass~age+I(age^2)+CatchOrder*Status+LastOfSexEstimate+(1|BirdID)+(1|FieldPeriodID),data = df_all_4)
+m3 <- lmer(BodyMass~CatchOrder*Status+LastOfSexEstimate+(1|BirdID)+(1|FieldPeriodID),data = df_all_4)
 summary(m3)
 plot(m3)
 qqnorm(resid(m3))
